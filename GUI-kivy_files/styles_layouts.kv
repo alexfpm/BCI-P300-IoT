@@ -1,0 +1,795 @@
+#Defining the visual properties
+
+
+MDBoxLayout:
+    orientation: "vertical"
+
+
+    MDToolbar:
+        title: "eliteEEG  |   by APM"
+
+        md_bg_color: 0/255, 166/255, 215/255, 0.85  #Cool blue
+        #md_bg_color: 0/255, 200/255, 100/255, 0.85  #Cool green
+
+
+    MDTabs:
+        background_color: 0/255, 166/255, 215/255, 0.85
+        #background_color: 0/255, 200/255, 100/255, 0.85
+
+        text_color_normal: 1, 1, 1, 0.85
+        text_color_active: 0, 0, 0, 0.85
+        underline_color: 1, 1, 1, 0.85
+
+
+        Tab1:
+            title: "Time Series"
+
+        Tab2:
+            title: "FFT"
+
+        Tab3:
+            title: "ERP"
+
+        Tab4:
+            title: "New ERPs"
+
+        Tab5:
+            title: "Target Prediction & IoT"
+
+        Tab6:
+            title: "Real-Time Mode"
+
+        #Tab7:
+            #title: "Example Tab"
+
+
+
+<Tab1>
+    box: box
+    chk1: checkbox1
+    chk2: checkbox2
+    chk3: checkbox3
+    op1: normal_mode
+    op2: rev_filt_mode
+
+
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+    #Graph widget
+    BoxLayout:
+        id: box
+        size_hint: 0.8, 0.93
+        pos_hint:{'x': 0, 'y': 0.05 }
+        orientation: 'vertical'
+
+
+    #Plot button
+    MDRaisedButton:
+        text:'Plot'
+        font_size: 17
+        pos_hint: {"center_x": 0.8, "center_y": 0.85 }
+        size_hint: 0.08, 0.07
+        md_bg_color: 50/255, 50/255, 50/255, 0.85
+        on_press: root.show_plot()
+
+
+    #Options for the plot
+    MDFloatLayout:
+        canvas:
+            Color:
+                rgba: app.theme_cls.primary_color
+            RoundedRectangle:
+                pos: self.pos
+                #Size for this layout seems to doesn't affect the checkboxes or labels. Using dummy values:
+                size: 0.7, 0.55
+                radius: [25, 0, 0, 0]
+
+
+        #----------------------------------------------------
+        #Channel Selection
+        MDCheckbox:
+            id: checkbox1
+            size_hint: None, None
+            size: "48dp", "48dp"
+            pos_hint: {'center_x': 0.77, 'center_y': 0.7}
+
+        MDCheckbox:
+            id: checkbox2
+            size_hint: None, None
+            size: "48dp", "48dp"
+            pos_hint: {'center_x': 0.77, 'center_y': 0.64}
+
+        MDCheckbox:
+            id: checkbox3
+            size_hint: None, None
+            size: "48dp", "48dp"
+            pos_hint: {'center_x': 0.77, 'center_y': 0.58}
+
+
+        MDLabel:
+            text: "CH1"
+            pos_hint: {'x': 0.79, 'y': 0.2}
+
+        MDLabel:
+            text: "CH2 (Cz)"
+            pos_hint: {'x': 0.79, 'y': 0.14}
+
+        MDLabel:
+            text: "CH3 (Pz)"
+            pos_hint: {'x': 0.79, 'y': 0.08}
+        #----------------------------------------------------
+
+
+        #----------------------------------------------------
+        #Mode selection: normal or rev_filt
+        MDCheckbox:
+            id: normal_mode
+            group: "data_source"
+            active: True
+            size_hint: None, None
+            size: "35dp", "35dp"
+            allow_no_selection: False
+            pos_hint: {'center_x': 0.773, 'center_y': 0.43}
+
+
+        MDCheckbox:
+            id: rev_filt_mode
+            group: "data_source"
+            size_hint: None, None
+            size: "35dp", "35dp"
+            allow_no_selection: False
+            pos_hint: {'center_x': 0.88, 'center_y': 0.43}
+
+
+        MDLabel:
+            text: "Mode:"
+            pos_hint: {'center_x': 1.26, 'center_y': 0.49}
+
+        MDLabel:
+            text: "1"
+            pos_hint: {'center_x': 1.295, 'center_y': 0.43}
+
+        MDLabel:
+            text: "2"
+            pos_hint: {'center_x': 1.405, 'center_y': 0.43}
+
+        MDLabel:
+            text: "1: Normal mode"
+            pos_hint: {'center_x': 1.26, 'center_y': 0.365}
+
+        MDLabel:
+            text: "2: rev_Filt mode"
+            pos_hint: {'center_x': 1.26, 'center_y': 0.325}
+        #----------------------------------------------------
+
+
+
+
+<Tab2>
+    box: box
+    chk1: checkbox1
+    chk2: checkbox2
+    chk3: checkbox3
+    op1: normal_mode
+    op2: rev_filt_mode
+
+
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+    #Graph widget
+    BoxLayout:
+        id: box
+        size_hint: 0.8, 0.93
+        pos_hint:{'x': 0, 'y': 0.05 }
+        orientation: 'vertical'
+
+
+    #Plot button
+    MDRaisedButton:
+        text:'Plot'
+        font_size: 17
+        pos_hint: {"center_x": 0.8, "center_y": 0.85 }
+        size_hint: 0.08, 0.07
+        md_bg_color: 50/255, 50/255, 50/255, 0.85
+        on_press: root.show_plot()
+
+
+    #Options for the plot
+    MDFloatLayout:
+        canvas:
+            Color:
+                rgba: app.theme_cls.primary_color
+            RoundedRectangle:
+                pos: self.pos
+                #Size for this layout seems to doesn't affect the checkboxes or labels. Using dummy values:
+                size: 0.7, 0.55
+                radius: [25, 0, 0, 0]
+
+
+        #----------------------------------------------------
+        #Channel Selection
+        MDCheckbox:
+            id: checkbox1
+            size_hint: None, None
+            size: "48dp", "48dp"
+            pos_hint: {'center_x': 0.77, 'center_y': 0.7}
+
+        MDCheckbox:
+            id: checkbox2
+            size_hint: None, None
+            size: "48dp", "48dp"
+            pos_hint: {'center_x': 0.77, 'center_y': 0.64}
+
+        MDCheckbox:
+            id: checkbox3
+            size_hint: None, None
+            size: "48dp", "48dp"
+            pos_hint: {'center_x': 0.77, 'center_y': 0.58}
+
+
+        MDLabel:
+            text: "CH1"
+            pos_hint: {'x': 0.79, 'y': 0.2}
+
+        MDLabel:
+            text: "CH2 (Cz)"
+            pos_hint: {'x': 0.79, 'y': 0.14}
+
+        MDLabel:
+            text: "CH3 (Pz)"
+            pos_hint: {'x': 0.79, 'y': 0.08}
+        #----------------------------------------------------
+
+
+        #----------------------------------------------------
+        #Mode selection: normal or rev_filt
+        MDCheckbox:
+            id: normal_mode
+            group: "data_source"
+            active: True
+            size_hint: None, None
+            size: "35dp", "35dp"
+            allow_no_selection: False
+            pos_hint: {'center_x': 0.773, 'center_y': 0.43}
+
+
+        MDCheckbox:
+            id: rev_filt_mode
+            group: "data_source"
+            size_hint: None, None
+            size: "35dp", "35dp"
+            allow_no_selection: False
+            pos_hint: {'center_x': 0.88, 'center_y': 0.43}
+
+
+        MDLabel:
+            text: "Mode:"
+            pos_hint: {'center_x': 1.26, 'center_y': 0.49}
+
+        MDLabel:
+            text: "1"
+            pos_hint: {'center_x': 1.295, 'center_y': 0.43}
+
+        MDLabel:
+            text: "2"
+            pos_hint: {'center_x': 1.405, 'center_y': 0.43}
+
+        MDLabel:
+            text: "1: Normal mode"
+            pos_hint: {'center_x': 1.26, 'center_y': 0.365}
+
+        MDLabel:
+            text: "2: rev_Filt mode"
+            pos_hint: {'center_x': 1.26, 'center_y': 0.325}
+        #----------------------------------------------------
+
+
+
+<Tab3>
+    box: box
+    chk1: checkbox1
+    chk2: checkbox2
+    op1: normal_mode
+    op2: rev_filt_mode
+    slider_val_1: time_val_1
+    slider_val_2: time_val_2
+
+
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+    #Graph widget
+    BoxLayout:
+        id: box
+        size_hint: 0.8, 0.93
+        pos_hint:{'x': 0, 'y': 0.05 }
+        orientation: 'vertical'
+
+
+    #Plot button
+    MDRaisedButton:
+        text:'Plot'
+        font_size: 17
+        pos_hint: {"center_x": 0.8, "center_y": 0.85 }
+        size_hint: 0.08, 0.07
+        md_bg_color: 50/255, 50/255, 50/255, 0.85
+        on_press: root.show_plot()
+
+
+    #Options for the plot
+    MDFloatLayout:
+        canvas:
+            Color:
+                rgba: app.theme_cls.primary_color
+            RoundedRectangle:
+                pos: self.pos
+                #Size for this layout seems to doesn't affect the checkboxes or labels. Using dummy values:
+                size: 0.7, 0.55
+                radius: [25, 0, 0, 0]
+
+
+        #----------------------------------------------------
+        #Channel selection
+        MDCheckbox:
+            id: checkbox1
+            size_hint: None, None
+            size: "35dp", "35dp"
+            pos_hint: {'center_x': 0.77, 'center_y': 0.7}
+
+        MDCheckbox:
+            id: checkbox2
+            size_hint: None, None
+            size: "35dp", "35dp"
+            pos_hint: {'center_x': 0.77, 'center_y': 0.64}
+
+
+        MDLabel:
+            text: "CH2 (Cz)"
+            pos_hint: {'x': 0.79, 'y': 0.2}
+
+        MDLabel:
+            text: "CH3 (Pz)"
+            pos_hint: {'x': 0.79, 'y': 0.14}
+        #----------------------------------------------------
+
+
+        #----------------------------------------------------
+        #Mode selection: normal or rev_filt
+        MDCheckbox:
+            id: normal_mode
+            group: "data_source"
+            active: True
+            size_hint: None, None
+            size: "35dp", "35dp"
+            allow_no_selection: False
+            pos_hint: {'center_x': 0.773, 'center_y': 0.47}
+
+
+        MDCheckbox:
+            id: rev_filt_mode
+            group: "data_source"
+            size_hint: None, None
+            size: "35dp", "35dp"
+            allow_no_selection: False
+            pos_hint: {'center_x': 0.88, 'center_y': 0.47}
+
+
+        MDLabel:
+            text: "Mode:"
+            pos_hint: {'center_x': 1.26, 'center_y': 0.53}
+
+        MDLabel:
+            text: "1"
+            pos_hint: {'center_x': 1.295, 'center_y': 0.47}
+
+        MDLabel:
+            text: "2"
+            pos_hint: {'center_x': 1.405, 'center_y': 0.47}
+
+        MDLabel:
+            text: "1: Normal mode"
+            pos_hint: {'center_x': 1.26, 'center_y': 0.405}
+
+        MDLabel:
+            text: "2: rev_Filt mode"
+            pos_hint: {'center_x': 1.26, 'center_y': 0.365}
+        #----------------------------------------------------
+
+
+
+    #Options to change time-limits for Figure
+    MDBoxLayout:
+        orientation: "vertical"
+        size_hint: 0.23, 0.15
+        pos_hint:{"center_x": 0.873,"center_y": 0.2}
+        opacity: 1 if root.show_sliders else 0
+        #md_bg_color: 0, 100/255, 0, 1
+
+
+        MDLabel:
+            text: "Max:"
+
+        MDSlider:
+            id: time_val_1
+            color: 50/255, 50/255, 50/255, 1
+            min: 50
+            max: 500
+            value: 250
+            step: 1
+            on_value: root.change_window_r(self.value)
+
+        MDLabel:
+            text: "Min:"
+
+        MDSlider:
+            id: time_val_2
+            color: 50/255, 50/255, 50/255, 1
+            min: 0
+            max: 300
+            value: 0
+            step: 1
+            on_value: root.change_window_l(self.value)
+
+
+
+<Tab4>
+    box: box
+    chk1: checkbox1
+    chk2: checkbox2
+    op1: normal_mode
+    op2: rev_filt_mode
+    slider_val_1: time_val_1
+    slider_val_2: time_val_2
+
+
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+    #Graph widget
+    BoxLayout:
+        id: box
+        size_hint: 0.8, 0.93
+        pos_hint:{'x': 0, 'y': 0.05 }
+        orientation: 'vertical'
+
+
+    #Plot button
+    MDRaisedButton:
+        text:'Plot'
+        font_size: 17
+        pos_hint: {"center_x": 0.8, "center_y": 0.85 }
+        size_hint: 0.08, 0.07
+        md_bg_color: 50/255, 50/255, 50/255, 0.85
+        on_press: root.show_plot()
+
+
+    #Options for the plot
+    MDFloatLayout:
+        canvas:
+            Color:
+                rgba: app.theme_cls.primary_color
+            RoundedRectangle:
+                pos: self.pos
+                #Size for this layout seems to doesn't affect the checkboxes or labels. Using dummy values:
+                size: 0.7, 0.55
+                radius: [25, 0, 0, 0]
+
+
+        #----------------------------------------------------
+        #Channel selection
+        MDCheckbox:
+            id: checkbox1
+            size_hint: None, None
+            size: "35dp", "35dp"
+            pos_hint: {'center_x': 0.77, 'center_y': 0.7}
+
+        MDCheckbox:
+            id: checkbox2
+            size_hint: None, None
+            size: "35dp", "35dp"
+            pos_hint: {'center_x': 0.77, 'center_y': 0.64}
+
+
+        MDLabel:
+            text: "CH2 (Cz)"
+            pos_hint: {'x': 0.79, 'y': 0.2}
+
+        MDLabel:
+            text: "CH3 (Pz)"
+            pos_hint: {'x': 0.79, 'y': 0.14}
+        #----------------------------------------------------
+
+
+        #----------------------------------------------------
+        #Mode selection: normal or rev_filt
+        MDCheckbox:
+            id: normal_mode
+            group: "data_source"
+            active: True
+            size_hint: None, None
+            size: "35dp", "35dp"
+            allow_no_selection: False
+            pos_hint: {'center_x': 0.773, 'center_y': 0.47}
+
+
+        MDCheckbox:
+            id: rev_filt_mode
+            group: "data_source"
+            size_hint: None, None
+            size: "35dp", "35dp"
+            allow_no_selection: False
+            pos_hint: {'center_x': 0.88, 'center_y': 0.47}
+
+
+        MDLabel:
+            text: "Mode:"
+            pos_hint: {'center_x': 1.26, 'center_y': 0.53}
+
+        MDLabel:
+            text: "1"
+            pos_hint: {'center_x': 1.295, 'center_y': 0.47}
+
+        MDLabel:
+            text: "2"
+            pos_hint: {'center_x': 1.405, 'center_y': 0.47}
+
+        MDLabel:
+            text: "1: Normal mode"
+            pos_hint: {'center_x': 1.26, 'center_y': 0.405}
+
+        MDLabel:
+            text: "2: rev_Filt mode"
+            pos_hint: {'center_x': 1.26, 'center_y': 0.365}
+        #----------------------------------------------------
+
+
+
+    #Options to change time-limits for Figure
+    MDBoxLayout:
+        orientation: "vertical"
+        size_hint: 0.23, 0.15
+        pos_hint:{"center_x": 0.873,"center_y": 0.2}
+        opacity: 1 if root.show_sliders else 0
+        #md_bg_color: 0, 100/255, 0, 1
+
+
+        MDLabel:
+            text: "Max:"
+
+        MDSlider:
+            id: time_val_1
+            color: 50/255, 50/255, 50/255, 1
+            min: 30
+            max: 100
+            value: 50
+            step: 1
+            on_value: root.change_window_r(self.value)
+
+        MDLabel:
+            text: "Min:"
+
+        MDSlider:
+            id: time_val_2
+            color: 50/255, 50/255, 50/255, 1
+            min: 0
+            max: 70
+            value: 0
+            step: 1
+            on_value: root.change_window_l(self.value)
+
+
+
+<Tab5>
+    box: box
+    chk1: checkbox1
+    chk2: checkbox2
+    op1: normal_mode
+    op2: rev_filt_mode
+
+
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+    #Graph widget
+    BoxLayout:
+        id: box
+        size_hint: 0.8, 0.93
+        pos_hint:{'x': 0, 'y': 0.05 }
+        orientation: 'vertical'
+
+
+    #Plot button
+    MDRaisedButton:
+        text:'Calculate'
+        font_size: 17
+        pos_hint: {"center_x": 0.8, "center_y": 0.85 }
+        size_hint: 0.08, 0.07
+        md_bg_color: 50/255, 50/255, 50/255, 0.85
+        on_press: root.show_plot()
+
+
+    #IoT button
+    MDRaisedButton:
+        text:'Run Action'
+        font_size: 17
+        pos_hint: {"center_x": 0.92, "center_y": 0.85 }
+        size_hint: 0.08, 0.07
+        md_bg_color: 50/255, 50/255, 50/255, 0.85
+        on_press: root.run_action_iot()
+
+
+
+    #Options for the plot
+    MDFloatLayout:
+        canvas:
+            Color:
+                rgba: app.theme_cls.primary_color
+            RoundedRectangle:
+                pos: self.pos
+                #Size for this layout seems to doesn't affect the checkboxes or labels. Using dummy values:
+                size: 0.7, 0.55
+                radius: [25, 0, 0, 0]
+
+
+        #----------------------------------------------------
+        #Channel selection
+        MDCheckbox:
+            id: checkbox1
+            size_hint: None, None
+            size: "35dp", "35dp"
+            pos_hint: {'center_x': 0.77, 'center_y': 0.7}
+
+        MDCheckbox:
+            id: checkbox2
+            size_hint: None, None
+            size: "35dp", "35dp"
+            pos_hint: {'center_x': 0.77, 'center_y': 0.64}
+
+
+        MDLabel:
+            text: "CH2 (Cz)"
+            pos_hint: {'x': 0.79, 'y': 0.2}
+
+        MDLabel:
+            text: "CH3 (Pz)"
+            pos_hint: {'x': 0.79, 'y': 0.14}
+        #----------------------------------------------------
+
+
+        #----------------------------------------------------
+        #Mode selection: normal or rev_filt
+        MDCheckbox:
+            id: normal_mode
+            group: "data_source"
+            active: True
+            size_hint: None, None
+            size: "35dp", "35dp"
+            allow_no_selection: False
+            pos_hint: {'center_x': 0.773, 'center_y': 0.47}
+
+
+        MDCheckbox:
+            id: rev_filt_mode
+            group: "data_source"
+            size_hint: None, None
+            size: "35dp", "35dp"
+            allow_no_selection: False
+            pos_hint: {'center_x': 0.88, 'center_y': 0.47}
+
+
+        MDLabel:
+            text: "Mode:"
+            pos_hint: {'center_x': 1.26, 'center_y': 0.53}
+
+        MDLabel:
+            text: "1"
+            pos_hint: {'center_x': 1.295, 'center_y': 0.47}
+
+        MDLabel:
+            text: "2"
+            pos_hint: {'center_x': 1.405, 'center_y': 0.47}
+
+        MDLabel:
+            text: "1: Normal mode"
+            pos_hint: {'center_x': 1.26, 'center_y': 0.405}
+
+        MDLabel:
+            text: "2: rev_Filt mode"
+            pos_hint: {'center_x': 1.26, 'center_y': 0.365}
+        #----------------------------------------------------
+
+
+
+<Tab6>
+    box1: boxGraph
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+
+        # Layout for animated matplotlib graph of data
+        MDBoxLayout:
+            id: boxGraph
+            size_hint: [1, 0.8]
+
+
+        # Layout for buttons: start and stop the plotting
+        MDFloatLayout:
+            size_hint: [1, 0.2]
+
+            MDRaisedButton:
+                text: "START"
+                font_size: 20
+                pos_hint: {"center_x": 0.35, "center_y": 0.5 }
+                size_hint: 0.17, 0.6
+                md_bg_color: 50/255, 50/255, 50/255, 0.85
+                on_press: root.start()
+
+            MDRaisedButton:
+                text: "STOP"
+                font_size: 20
+                pos_hint: {"center_x": 0.65, "center_y": 0.5 }
+                size_hint: 0.17, 0.6
+                md_bg_color: 50/255, 50/255, 50/255, 0.85
+                on_press: root.stop()
+
+
+
+#<Tab7>
+#    box: box
+#
+#
+#    canvas.before:
+#        Color:
+#            rgba: 1, 1, 1, 1
+#        Rectangle:
+#            pos: self.pos
+#            size: self.size
+#
+#
+#    #Graph widget
+#    BoxLayout:
+#        id: box
+#        size_hint: 0.8, 0.93
+#        pos_hint:{'x': 0, 'y': 0.05 }
+#        orientation: 'vertical'
+#
+#
+#    #Plot button
+#    MDRaisedButton:
+#        text:'Plot'
+#        font_size: 17
+#        pos_hint: {"center_x": 0.8, "center_y": 0.85 }
+#        size_hint: 0.08, 0.07
+#        md_bg_color: 50/255, 50/255, 50/255, 0.85
+#        on_press: root.show_plot()
+
+
+
